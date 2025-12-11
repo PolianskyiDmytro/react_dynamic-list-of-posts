@@ -47,6 +47,10 @@ export const NewCommentForm: React.FC<Props> = ({
   const addComment = (event: React.FormEvent) => {
     event.preventDefault();
 
+    setName(name.trim());
+    setEmail(email.trim());
+    setBody(body.trim());
+
     if (!name) {
       setNameMessage('Name is required');
     }
