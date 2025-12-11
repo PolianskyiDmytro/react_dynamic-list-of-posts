@@ -37,7 +37,7 @@ export const UserSelector: React.FC<Props> = ({ onSelect, setIsSelected }) => {
     <div
       data-cy="UserSelector"
       className={classNames('dropdown', { 'is-active': isOpen })}
-      onBlur={() => setTimeout(() => setIsOpen(false), 150)}
+      onBlur={() => setTimeout(() => setIsOpen(false), 300)}
     >
       <div className="dropdown-trigger">
         <button

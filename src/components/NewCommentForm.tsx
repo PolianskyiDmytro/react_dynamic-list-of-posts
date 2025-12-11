@@ -65,7 +65,7 @@ export const NewCommentForm: React.FC<Props> = ({
 
     onAdd({ name, email, body, postId });
 
-    reset();
+    setBody('');
   };
 
   return (
