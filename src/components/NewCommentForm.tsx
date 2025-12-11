@@ -47,10 +47,6 @@ export const NewCommentForm: React.FC<Props> = ({
   const addComment = (event: React.FormEvent) => {
     event.preventDefault();
 
-    setName(name.trim());
-    setEmail(email.trim());
-    setBody(body.trim());
-
     if (!name) {
       setNameMessage('Name is required');
     }
@@ -72,10 +68,18 @@ export const NewCommentForm: React.FC<Props> = ({
     setBody('');
   };
 
+  const prepareComment = (event: React.FormEvent) => {
+    setName(name.trim());
+    setEmail(email.trim());
+    setBody(body.trim());
+
+    addComment(event);
+  };
+
   return (
     <form
       data-cy="NewCommentForm"
-      onSubmit={event => addComment(event)}
+      onSubmit={event => prepareComment(event)}
       onReset={reset}
     >
       <div className="field" data-cy="NameField">
