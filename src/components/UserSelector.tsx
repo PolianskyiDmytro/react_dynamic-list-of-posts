@@ -19,6 +19,10 @@ export const UserSelector: React.FC<Props> = ({ onSelect, setIsSelected }) => {
   ) => {
     event.preventDefault();
 
+    if (chosenUser && chosenUser.id === userId) {
+      return;
+    }
+
     onSelect(userId);
     setIsSelected(true);
     setChosenUser(users.find(user => user.id === userId) || null);
@@ -33,7 +37,7 @@ export const UserSelector: React.FC<Props> = ({ onSelect, setIsSelected }) => {
     <div
       data-cy="UserSelector"
       className={classNames('dropdown', { 'is-active': isOpen })}
-      onBlur={() => setIsOpen(false)}
+      onBlur={() => setTimeout(() => setIsOpen(false), 150)}
     >
       <div className="dropdown-trigger">
         <button
@@ -64,7 +68,6 @@ export const UserSelector: React.FC<Props> = ({ onSelect, setIsSelected }) => {
                 'is-active': chosenUser?.id === user.id,
               })}
               key={user.id}
-              onMouseDown={event => selectUser(event, user.id)}
               onClick={event => selectUser(event, user.id)}
             >
               {user.name}
