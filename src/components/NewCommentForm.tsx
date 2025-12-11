@@ -47,39 +47,43 @@ export const NewCommentForm: React.FC<Props> = ({
   const addComment = (event: React.FormEvent) => {
     event.preventDefault();
 
-    if (!name) {
+    const trimmedName = name.trim();
+    const trimmedEmail = email.trim();
+    const trimmedBody = body.trim();
+
+    if (!trimmedName) {
       setNameMessage('Name is required');
+      setName(name.trim());
     }
 
-    if (!email) {
+    if (!trimmedEmail) {
       setEmailMessage('Email is required');
+      setEmail(email.trim());
     }
 
-    if (!body) {
+    if (!trimmedBody) {
       setBodyMessage('Comment body is required');
+      setBody(body.trim());
     }
 
-    if (!name || !email || !body) {
+    if (!trimmedName || !trimmedEmail || !trimmedBody) {
       return;
     }
 
-    onAdd({ name, email, body, postId });
+    onAdd({
+      name: trimmedName,
+      email: trimmedEmail,
+      body: trimmedBody,
+      postId,
+    });
 
     setBody('');
-  };
-
-  const prepareComment = (event: React.FormEvent) => {
-    setName(name.trim());
-    setEmail(email.trim());
-    setBody(body.trim());
-
-    addComment(event);
   };
 
   return (
     <form
       data-cy="NewCommentForm"
-      onSubmit={event => prepareComment(event)}
+      onSubmit={event => addComment(event)}
       onReset={reset}
     >
       <div className="field" data-cy="NameField">
